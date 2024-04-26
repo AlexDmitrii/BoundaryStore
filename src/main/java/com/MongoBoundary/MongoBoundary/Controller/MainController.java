@@ -45,7 +45,7 @@ public class MainController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        Order order = new Order(Integer.valueOf(orderId), statusInRaketa.toString());
+//        Order order = new Order(Integer.valueOf(orderId), statusInRaketa.toString());вв
 //        orderRepo.save(order);
     }
 
