@@ -1,4 +1,4 @@
-package com.MongoBoundary.MongoBoundary;
+package com.MongoBoundary;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

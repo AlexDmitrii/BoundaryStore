@@ -1,4 +1,4 @@
-package com.MongoBoundary.MongoBoundary;
+package com.MongoBoundary;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
