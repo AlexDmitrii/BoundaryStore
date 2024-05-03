@@ -72,7 +72,7 @@ public class OrderController {
         Order order = getOrderById(orderId);
         if (order != null) {
             orderRepo.delete(order);
-            return "Заказ №" + order + " был удален!";
+            return "Заказ №" + orderId + " был удален!";
         }
 
         return "Заказ № " + orderId + " не найден!";
