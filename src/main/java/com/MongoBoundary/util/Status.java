@@ -8,8 +8,10 @@ import lombok.Getter;
 @Getter
 public enum Status {
 
-    STATUS_OK("ok"),
-    STATUS_NOT_FOUND("not found");
+    STATUS_SUCCESS("success"),
+    STATUS_INFO("info"),
+    STATUS_WARNING("warning"),
+    STATUS_ERROR("error");
 
     private final String status;
 }

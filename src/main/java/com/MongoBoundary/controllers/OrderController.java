@@ -17,6 +17,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
+@CrossOrigin
 public class OrderController {
 
     final OrderRepo orderRepo;
@@ -82,11 +83,12 @@ public class OrderController {
     public String editOrderById(@RequestBody Order editedOrder, @PathVariable String orderId){
         Order order = getOrderById(orderId);
         if (order != null) {
-            //TODO: дописать
-            return "{\"status\": \"" + Status.STATUS_OK.getStatus() + "\"}";
+            editedOrder.setOrderId(order.getOrderId());
+            orderRepo.save(editedOrder);
+            return "{\"status\": \"" + Status.STATUS_SUCCESS.getStatus() + "\"}";
         }
 
-        return "\"status\": \"" + Status.STATUS_NOT_FOUND.getStatus() + "\"";
+        return "\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"";
     }
 
     public Order getOrderById(String orderId){

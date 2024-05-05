@@ -12,9 +12,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 public class Order {
 
-    @Id private String orderId;
+    @Id
+    private String orderId;
 
-    private String StatusInRaketa;
+    private String statusInRaketa;
     //TODO: make User
     private String userID;
     private String nameProduct;
@@ -22,6 +23,5 @@ public class Order {
     private String description;
     private Integer quantity;
     private String deliveryRaketaOrderId;
-
 
 }
