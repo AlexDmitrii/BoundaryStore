@@ -1,8 +1,7 @@
 package com.MongoBoundary.controllers;
 
 import com.MongoBoundary.models.Order;
-import com.MongoBoundary.repositories.OrderRepo;
-import com.MongoBoundary.util.Status;
+import com.MongoBoundary.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,7 +19,7 @@ import java.util.List;
 @CrossOrigin
 public class OrderController {
 
-    final OrderRepo orderRepo;
+    final OrderService orderService;
 
     @Value("${soap.urlRaketa}")
     String urlRaketa;
@@ -49,59 +48,27 @@ public class OrderController {
 
     @PostMapping("/create")
     public Order createOrder(@RequestBody Order order) {
-        try {
-            orderRepo.save(order);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return order;
+        return orderService.createOrder(order);
     }
 
     @GetMapping
     public List<Order> getAllOrders() {
-        return orderRepo.findAll();
+        return orderService.getAllOrders();
     }
 
     @GetMapping("/{userID}")
     public List<Order> getOrdersByUserId(@PathVariable String userID) {
-        return getOrderByUserId(userID);
+        return orderService.getOrdersByUserId(userID);
     }
 
     @GetMapping("/delete/{orderId}")
     public String deleteOrderById(@PathVariable String orderId){
-        Order order = getOrderById(orderId);
-        if (order != null) {
-            orderRepo.delete(order);
-            return "Заказ №" + orderId + " был удален!";
-        }
-
-        return "Заказ № " + orderId + " не найден!";
+        return orderService.deleteOrderById(orderId);
     }
 
     @PostMapping("/edit/{orderId}")
     public String editOrderById(@RequestBody Order editedOrder, @PathVariable String orderId){
-        Order order = getOrderById(orderId);
-        if (order != null) {
-            editedOrder.setOrderId(order.getOrderId());
-            orderRepo.save(editedOrder);
-            return "{\"status\": \"" + Status.STATUS_SUCCESS.getStatus() + "\"}";
-        }
-
-        return "\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"";
-    }
-
-    public Order getOrderById(String orderId){
-        return orderRepo.findAll().stream()
-                .filter(el -> el.getOrderId().equals(orderId))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public List<Order> getOrderByUserId(String userID){
-        return orderRepo.findAll().stream()
-                .filter(el -> el.getUserID().equals(userID))
-                .toList();
+        return orderService.editOrderById(editedOrder, orderId);
     }
 
 }
