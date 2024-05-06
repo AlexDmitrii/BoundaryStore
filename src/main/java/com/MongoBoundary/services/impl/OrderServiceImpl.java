@@ -12,7 +12,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class OrderServiceImplementaion implements OrderService {
+public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
 
