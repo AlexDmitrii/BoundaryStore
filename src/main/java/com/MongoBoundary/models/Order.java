@@ -22,6 +22,13 @@ public class Order {
     private String linkOnProduct;
     private String description;
     private Integer quantity;
-    private String deliveryRaketaOrderId;
+    private String raketaId;
+    private String prId;
+    private String dateCreate;
+    private Double amount;
+    private Double priceDelivery;
+    private Double commission;
+    private Double amountItems;
+    private String status;
 
 }
