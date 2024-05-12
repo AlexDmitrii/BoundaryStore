@@ -3,6 +3,7 @@ package com.MongoBoundary.services.impl;
 import com.MongoBoundary.models.Order;
 import com.MongoBoundary.repositories.OrderRepo;
 import com.MongoBoundary.services.OrderService;
+import com.MongoBoundary.util.SoapUtil;
 import com.MongoBoundary.util.Status;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -73,5 +74,10 @@ public class OrderServiceImpl implements OrderService {
         return orderRepo.findAll().stream()
                 .filter(el -> el.getUserID() != null && el.getUserID().equals(userID))
                 .toList();
+    }
+
+    public String getDeliveryHistoryByOrderId(String orderId, String urlPR, String urlRaketa, String loginPR, String passwordPR) {
+        Order order = getOrderById(orderId);
+        return SoapUtil.getDeliveryHistory(order.getRaketaId(), order.getPrId(), urlPR, urlRaketa, loginPR, passwordPR);
     }
 }

@@ -14,5 +14,6 @@ public interface OrderService {
     String editOrderById(Order editedOrder, @PathVariable String orderId);
     Order getOrderById(String orderId);
     List<Order> getOrderByUserId(String userID);
+    String getDeliveryHistoryByOrderId(String orderId, String urlPR, String urlRaketa, String loginPR, String passwordPR);
 
 }

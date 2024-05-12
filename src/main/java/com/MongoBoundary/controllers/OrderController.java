@@ -3,14 +3,9 @@ package com.MongoBoundary.controllers;
 import com.MongoBoundary.models.Order;
 import com.MongoBoundary.services.OrderService;
 import lombok.RequiredArgsConstructor;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -20,41 +15,23 @@ import java.util.List;
 public class OrderController {
 
     @Value("${soap.urlPR}")
-    String urlPR;//80089792920747
+    String urlPR;
 
     @Value("${soap.loginRussianPost}")
-    String login;
+    String loginPR;
 
     @Value("${soap.passwordRussianPost}")
-    String password;
+    String passwordPR;
 
     @Value("${soap.urlRaketa}")
     String urlRaketa;
 
     final OrderService orderService;
 
-    @GetMapping("/getStatus/{orderId}")
-    public String getStatus(@PathVariable String orderId) {
-        StringBuilder statusInRaketa = new StringBuilder();
-//        SoapUtil.getOperationHistory(urlPR, login, password);
-        try {
-            Document doc = Jsoup.connect(urlRaketa + orderId)
-                    .userAgent("Mozilla")
-                    .timeout(5000)
-                    .referrer("https://google.com")
-                    .get();
-
-            Elements steps = doc.getElementsByClass("delivery-step");
-            for (Element step : steps) {
-                statusInRaketa.append(step.getElementsByClass("status-text").text()).append("\n").append(step.getElementsByClass("date-text").text()).append("\n");
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return statusInRaketa.toString();
+    @GetMapping("/getDeliveryHistory/{orderId}")
+    public String getStatusDeliveryByOrderId(@PathVariable String orderId) {
+        return orderService.getDeliveryHistoryByOrderId(orderId, urlPR, urlRaketa, loginPR, passwordPR);
     }
-
     @PostMapping("/create")
     public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
