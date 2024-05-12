@@ -6,18 +6,9 @@ import org.springframework.web.client.RestTemplate;
 
 public class SoapUtil {
 
-    @Value("${soap.urlPR}")
-    static String urlPR;//80089792920747
-
-    @Value("${soap.loginRussianPost}")
-    static String login;
-
-    @Value("${soap.passwordRussianPost}")
-    static String password;
-
     public static void decodeSoap(String body) {}
 
-    public static String getOperationHistory(){
+    public static String getOperationHistory(String urlPR, String login ,String password){
         String soapRequest = "  <soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" xmlns:oper=\"http://russianpost.org/operationhistory\" xmlns:data=\"http://russianpost.org/operationhistory/data\" xmlns:ns1=\"http://schemas.xmlsoap.org/soap/envelope/\">\n" +
                 "   <soap:Header/>\n" +
                 "   <soap:Body>\n" +

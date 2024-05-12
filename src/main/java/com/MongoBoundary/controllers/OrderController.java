@@ -19,15 +19,24 @@ import java.util.List;
 @CrossOrigin
 public class OrderController {
 
-    final OrderService orderService;
+    @Value("${soap.urlPR}")
+    String urlPR;//80089792920747
+
+    @Value("${soap.loginRussianPost}")
+    String login;
+
+    @Value("${soap.passwordRussianPost}")
+    String password;
 
     @Value("${soap.urlRaketa}")
     String urlRaketa;
 
+    final OrderService orderService;
+
     @GetMapping("/getStatus/{orderId}")
     public String getStatus(@PathVariable String orderId) {
         StringBuilder statusInRaketa = new StringBuilder();
-//        SoapUtil.getOperationHistory();
+//        SoapUtil.getOperationHistory(urlPR, login, password);
         try {
             Document doc = Jsoup.connect(urlRaketa + orderId)
                     .userAgent("Mozilla")
