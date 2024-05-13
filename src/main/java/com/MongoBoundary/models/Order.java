@@ -1,14 +1,18 @@
 package com.MongoBoundary.models;
 
+import com.MongoBoundary.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
+
+import java.util.Date;
 
 @Document (collection = "order")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Order {
 
@@ -31,4 +35,7 @@ public class Order {
     private Double amountItems;
     private String status;
 
+    public Order() {
+        this.dateCreate = Util.getCurrentDate();
+    }
 }
