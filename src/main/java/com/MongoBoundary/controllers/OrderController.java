@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/orders")
@@ -32,6 +33,7 @@ public class OrderController {
     public String getStatusDeliveryByOrderId(@PathVariable String orderId) {
         return orderService.getDeliveryHistoryByOrderId(orderId, urlPR, urlRaketa, loginPR, passwordPR);
     }
+
     @PostMapping("/create")
     public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
@@ -53,8 +55,8 @@ public class OrderController {
     }
 
     @PostMapping("/edit/{orderId}")
-    public String editOrderById(@RequestBody Order editedOrder, @PathVariable String orderId){
-        return orderService.editOrderById(editedOrder, orderId);
+    public String editOrderById(@RequestBody Map<String, Object> data, @PathVariable String orderId){
+        return orderService.editOrderById(data, orderId);
     }
 
 }

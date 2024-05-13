@@ -1,7 +1,12 @@
 package com.MongoBoundary.util;
 
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class Util {
 
@@ -24,5 +29,21 @@ public class Util {
         }
 
         return result.toString();
+    }
+
+    public static Query getQueryById(String orderId){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(orderId));
+
+        return query;
+    }
+
+    public static Update fillDataForUpdate (Map<String, Object> data){
+        Update update = new Update();
+        for (String key : data.keySet()){
+            update.set(key, data.get(key));
+        }
+
+        return update;
     }
 }

@@ -46,7 +46,6 @@ public class SoapUtil {
         List<Map<String, String>> datesAndStatuses = new ArrayList<>();
 
         try {
-            System.out.println("URL RAKETA - " + urlRaketa + idRaketa);
 
             Document doc = Jsoup.connect(urlRaketa + idRaketa)
                     .userAgent("Mozilla")

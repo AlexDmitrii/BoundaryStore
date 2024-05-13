@@ -3,19 +3,25 @@ package com.MongoBoundary.services.impl;
 import com.MongoBoundary.models.Order;
 import com.MongoBoundary.repositories.OrderRepo;
 import com.MongoBoundary.services.OrderService;
+import com.MongoBoundary.util.Constant;
 import com.MongoBoundary.util.SoapUtil;
 import com.MongoBoundary.util.Status;
+import com.MongoBoundary.util.Util;
 import lombok.AllArgsConstructor;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
+
+    private final MongoTemplate mongoTemplate;
 
     @Override
     public Order createOrder(Order order) {
@@ -42,23 +48,29 @@ public class OrderServiceImpl implements OrderService {
     public String deleteOrderById(String orderId) {
         Order order = getOrderById(orderId);
         if (order != null) {
-            orderRepo.delete(order);
-            return "Заказ №" + orderId + " был удален!";
+            try{
+                orderRepo.delete(order);
+                return Status.returnStatus(Status.STATUS_SUCCESS);
+            } catch (Exception e){
+                return Status.returnStatus(Status.STATUS_ERROR);
+            }
         }
 
-        return "Заказ № " + orderId + " не найден!";
+        return Status.returnStatus(Status.STATUS_NOT_FOUND);
     }
 
     @Override
-    public String editOrderById(Order editedOrder, @PathVariable String orderId) {
-        Order order = getOrderById(orderId);
-        if (order != null) {
-            editedOrder.setOrderId(order.getOrderId());
-            orderRepo.save(editedOrder);
-            return "{\"status\": \"" + Status.STATUS_SUCCESS.getStatus() + "\"}";
+    public String editOrderById(Map<String, Object> data, String orderId) {
+        if (data != null && !data.isEmpty()) {
+            Query query = Util.getQueryById(orderId);
+            Update update = Util.fillDataForUpdate(data);
+
+            mongoTemplate.updateFirst(query, update, Order.class, Constant.ORDER_DB_NAME);
+
+            return Status.returnStatus(Status.STATUS_SUCCESS);
         }
 
-        return "\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"";
+        return Status.returnStatus(Status.STATUS_ERROR);
     }
 
     @Override
@@ -76,6 +88,7 @@ public class OrderServiceImpl implements OrderService {
                 .toList();
     }
 
+    @Override
     public String getDeliveryHistoryByOrderId(String orderId, String urlPR, String urlRaketa, String loginPR, String passwordPR) {
         Order order = getOrderById(orderId);
         return SoapUtil.getDeliveryHistory(order.getRaketaId(), order.getPrId(), urlPR, urlRaketa, loginPR, passwordPR);
