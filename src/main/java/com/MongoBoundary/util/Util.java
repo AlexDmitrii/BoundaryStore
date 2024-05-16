@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Map;
 
@@ -45,5 +46,9 @@ public class Util {
         }
 
         return update;
+    }
+
+    public static String getBase64FromArrayBytes(byte[] bytes){
+        return Base64.getEncoder().encodeToString(bytes);
     }
 }

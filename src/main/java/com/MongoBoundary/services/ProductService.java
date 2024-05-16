@@ -6,6 +6,7 @@ public interface ProductService {
 
     Product createProduct(Product product);
     boolean deleteProduct(String productId);
-    Product editProduct(Product product);
+    Product updateProduct(Product product);
+    Product findProductByProductId(String productId);
 
 }

@@ -29,7 +29,12 @@ public class OrderController {
 
     final OrderService orderService;
 
-    @GetMapping("/getDeliveryHistory/{orderId}")
+    @GetMapping
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
+    }
+
+    @GetMapping(value = "/getDeliveryHistory/{orderId}", produces = "application/json")
     public String getStatusDeliveryByOrderId(@PathVariable String orderId) {
         return orderService.getDeliveryHistoryByOrderId(orderId, urlPR, urlRaketa, loginPR, passwordPR);
     }
@@ -37,11 +42,6 @@ public class OrderController {
     @PostMapping("/create")
     public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
-    }
-
-    @GetMapping
-    public List<Order> getAllOrders() {
-        return orderService.getAllOrders();
     }
 
     @GetMapping("/{userID}")
