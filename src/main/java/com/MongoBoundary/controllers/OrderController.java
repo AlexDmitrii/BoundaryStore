@@ -12,7 +12,6 @@ import java.util.Map;
 @RestController
 @RequestMapping("/orders")
 @RequiredArgsConstructor
-@CrossOrigin
 public class OrderController {
 
     @Value("${soap.urlPR}")
@@ -55,8 +54,8 @@ public class OrderController {
     }
 
     @PostMapping("/edit/{orderId}")
-    public String editOrderById(@RequestBody Map<String, Object> data, @PathVariable String orderId){
-        return orderService.editOrderById(data, orderId);
+    public String updateOrderById(@RequestBody Map<String, Object> data, @PathVariable String orderId){
+        return orderService.updateOrderById(data, orderId);
     }
 
 }

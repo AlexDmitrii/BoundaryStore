@@ -30,7 +30,7 @@ public class SoapUtil {
         statuses.addAll(getHistoryFromPR(prId, urlPR, loginPR, passwordPR));
 
         JSONArray jsonArray = new JSONArray();
-        for (Map<String, String> map: statuses) {
+        for (Map<String, String> map : statuses) {
             JSONObject item = new JSONObject();
             item.put("title", map.get("status"));
             item.put("description", map.get("date"));

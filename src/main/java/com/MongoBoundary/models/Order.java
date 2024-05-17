@@ -1,12 +1,13 @@
 package com.MongoBoundary.models;
 
+import com.MongoBoundary.util.Constant;
 import com.MongoBoundary.util.Util;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document (collection = "order")
+@Document (collection = Constant.ORDER_DB_NAME)
 @Data
 @AllArgsConstructor
 public class Order {

@@ -9,5 +9,4 @@ public class MongoBoundaryApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MongoBoundaryApplication.class, args);
 	}
-
 }

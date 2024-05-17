@@ -11,7 +11,7 @@ public interface OrderService {
     List<Order> getAllOrders();
     List<Order> getOrdersByUserId(String userID);
     String deleteOrderById(String orderId);
-    String editOrderById(Map<String, Object> data, String orderId);
+    String updateOrderById(Map<String, Object> data, String orderId);
     Order getOrderById(String orderId);
     List<Order> getOrderByUserId(String userID);
     String getDeliveryHistoryByOrderId(String orderId, String urlPR, String urlRaketa, String loginPR, String passwordPR);

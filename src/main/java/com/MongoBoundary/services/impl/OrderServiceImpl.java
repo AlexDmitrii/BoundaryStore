@@ -60,7 +60,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String editOrderById(Map<String, Object> data, String orderId) {
+    public String updateOrderById(Map<String, Object> data, String orderId) {
         if (data != null && !data.isEmpty()) {
             Query query = Util.getQueryById(orderId);
             Update update = Util.fillDataForUpdate(data);

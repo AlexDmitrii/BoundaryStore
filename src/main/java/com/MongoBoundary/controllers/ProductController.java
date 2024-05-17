@@ -15,10 +15,10 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
-@CrossOrigin
 public class ProductController {
 
     final ProductService productService;
+
     @PostMapping("/createProduct")
     public Product createProduct(@RequestBody Product product){
         productService.createProduct(product);
