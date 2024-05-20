@@ -20,6 +20,14 @@ public class Product{
     private Integer quantity;
     private Integer price;
     private Boolean active;
+
+    //Габариты
+    private Double x;
+    private Double y;
+    private Double z;
+
+    private Double volume;
+
     public byte[] imageBytes;
 
 }

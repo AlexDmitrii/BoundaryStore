@@ -4,7 +4,6 @@ import com.MongoBoundary.models.Image;
 import com.MongoBoundary.services.ImageService;
 import com.MongoBoundary.util.Util;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
