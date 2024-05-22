@@ -91,6 +91,13 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String getDeliveryHistoryByOrderId(String orderId, String urlPR, String urlRaketa, String loginPR, String passwordPR) {
         Order order = getOrderById(orderId);
-        return SoapUtil.getDeliveryHistory(order.getRaketaId(), order.getPrId(), urlPR, urlRaketa, loginPR, passwordPR);
+        if (order != null) {
+            if (order.getRaketaId() == null || order.getPrId() == null || order.getRaketaId().isEmpty() || order.getPrId().isEmpty())
+                return "{\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"," +
+                        "\"description\": \"raketaId or prId is empty\"}";
+            return SoapUtil.getDeliveryHistory(order.getRaketaId(), order.getPrId(), urlPR, urlRaketa, loginPR, passwordPR);
+        }
+        return "{\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"," +
+                    "\"description\": \"Заказ №" + orderId + " не найден!\"}";
     }
 }
