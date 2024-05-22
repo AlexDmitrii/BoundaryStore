@@ -7,6 +7,8 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document (collection = Constant.ORDER_DB_NAME)
 @Data
 @AllArgsConstructor
@@ -19,9 +21,8 @@ public class Order {
     //TODO: make User
     private String userID;
     private String nameProduct;
-    private String linkOnProduct;
+    private List<String> products;
     private String description;
-    private Integer quantity;
     private String raketaId;
     private String prId;
     private String dateCreate;

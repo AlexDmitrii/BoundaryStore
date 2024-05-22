@@ -1,6 +1,7 @@
 package com.MongoBoundary.controllers;
 
 import com.MongoBoundary.models.Order;
+import com.MongoBoundary.models.ProductsList;
 import com.MongoBoundary.services.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +57,11 @@ public class OrderController {
     @PostMapping("/edit/{orderId}")
     public String updateOrderById(@RequestBody Map<String, Object> data, @PathVariable String orderId){
         return orderService.updateOrderById(data, orderId);
+    }
+
+    @PostMapping("/linkProduct/{orderId}")
+    public String linkProductsToOrder(@PathVariable String orderId, @RequestBody ProductsList productsList){
+        return orderService.linkProductsToOrder(orderId, productsList);
     }
 
 }

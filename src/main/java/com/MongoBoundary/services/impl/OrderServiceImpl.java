@@ -1,7 +1,10 @@
 package com.MongoBoundary.services.impl;
 
 import com.MongoBoundary.models.Order;
+import com.MongoBoundary.models.Product;
+import com.MongoBoundary.models.ProductsList;
 import com.MongoBoundary.repositories.OrderRepo;
+import com.MongoBoundary.repositories.ProductRepo;
 import com.MongoBoundary.services.OrderService;
 import com.MongoBoundary.util.Constant;
 import com.MongoBoundary.util.SoapUtil;
@@ -12,6 +15,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +25,8 @@ import java.util.Map;
 public class OrderServiceImpl implements OrderService {
 
     private final OrderRepo orderRepo;
+
+    private final ProductRepo productRepo;
 
     private final MongoTemplate mongoTemplate;
 
@@ -100,4 +107,45 @@ public class OrderServiceImpl implements OrderService {
         return "{\"status\": \"" + Status.STATUS_ERROR.getStatus() + "\"," +
                     "\"description\": \"Заказ №" + orderId + " не найден!\"}";
     }
+
+    @Override
+    public String linkProductsToOrder(String orderId, ProductsList productsList) {
+        List<Product> resultProductsIds = new ArrayList<>();
+        List<String> productIds = productsList.getProductsList();
+
+        for (String productId : productIds){
+            System.out.println("product: " + productId);
+            Product product = productRepo.findProductByProductId(productId);
+
+            if (product == null) continue;
+
+            resultProductsIds.add(product);
+        }
+
+        if (resultProductsIds.isEmpty())
+            return Status.returnStatus(Status.STATUS_NOT_FOUND);
+
+        Query query = Util.getQueryById(orderId);
+        Update update = new Update();
+        update.set("products", resultProductsIds);
+
+        mongoTemplate.updateFirst(query, update, Order.class, Constant.ORDER_DB_NAME);
+
+        return Status.returnStatus(Status.STATUS_SUCCESS);
+
+    }
+
+    @Override
+    public List<Product> getProductsByOrderId(String orderId) {
+        Order order = orderRepo.findByOrderId(orderId);
+
+        if (order == null) return null;
+
+        Query query = Util.getQueryById(orderId);
+
+
+        return mongoTemplate.find(query, Product.class);
+    }
+
+
 }
