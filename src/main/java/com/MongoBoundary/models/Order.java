@@ -21,7 +21,7 @@ public class Order {
     //TODO: make User
     private String userID;
     private String nameProduct;
-    private List<String> products;
+    private List<Product> products;
     private String description;
     private String raketaId;
     private String prId;

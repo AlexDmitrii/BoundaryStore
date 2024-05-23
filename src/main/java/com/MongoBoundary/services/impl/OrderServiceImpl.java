@@ -114,7 +114,6 @@ public class OrderServiceImpl implements OrderService {
         List<String> productIds = productsList.getProductsList();
 
         for (String productId : productIds){
-            System.out.println("product: " + productId);
             Product product = productRepo.findProductByProductId(productId);
 
             if (product == null) continue;
@@ -141,10 +140,7 @@ public class OrderServiceImpl implements OrderService {
 
         if (order == null) return null;
 
-        Query query = Util.getQueryById(orderId);
-
-
-        return mongoTemplate.find(query, Product.class);
+        return order.getProducts();
     }
 
 

@@ -1,6 +1,7 @@
 package com.MongoBoundary.controllers;
 
 import com.MongoBoundary.models.Order;
+import com.MongoBoundary.models.Product;
 import com.MongoBoundary.models.ProductsList;
 import com.MongoBoundary.services.OrderService;
 import lombok.RequiredArgsConstructor;
@@ -62,6 +63,11 @@ public class OrderController {
     @PostMapping("/linkProduct/{orderId}")
     public String linkProductsToOrder(@PathVariable String orderId, @RequestBody ProductsList productsList){
         return orderService.linkProductsToOrder(orderId, productsList);
+    }
+
+    @GetMapping("/getProducts/{orderId}")
+    public List<Product> getProducts(@PathVariable String orderId){
+        return orderService.getProductsByOrderId(orderId);
     }
 
 }
