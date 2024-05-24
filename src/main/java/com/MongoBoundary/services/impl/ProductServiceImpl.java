@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProductServiceImpl implements ProductService {
@@ -22,6 +24,11 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepo productRepo;
 
     private final MongoTemplate mongoTemplate;
+
+    @Override
+    public List<Product> getListProducts() {
+        return productRepo.findAll();
+    }
 
     @Override
     public Product createProduct(Product product) {

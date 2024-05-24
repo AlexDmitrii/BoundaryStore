@@ -12,12 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
 
     final ProductService productService;
+
+    @GetMapping
+    public List<Product> getAllProducts(){
+        return productService.getListProducts();
+    }
 
     @PostMapping("/createProduct")
     public Product createProduct(@RequestBody Product product){

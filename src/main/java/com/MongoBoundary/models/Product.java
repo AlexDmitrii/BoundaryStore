@@ -20,6 +20,7 @@ public class Product{
     private Integer quantity;
     private Integer price;
     private Boolean active;
+    private String linkOnProduct;
 
     //Габариты
     private Double x;
