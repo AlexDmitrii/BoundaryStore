@@ -26,8 +26,10 @@ public class Product{
     private Double x;
     private Double y;
     private Double z;
-
     private Double volume;
+
+    private String size;
+    private String color;
 
     public byte[] imageBytes;
 

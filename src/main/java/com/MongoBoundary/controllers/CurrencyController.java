@@ -22,8 +22,7 @@ public class CurrencyController {
 
     @GetMapping("/getCurrencyRate")
     public String getCurrencyRate() {
-        System.out.println("getCurrencyRate == " + urlCurrency);
-        return currencyService.getCurrencyRate(urlCurrency);
+        return currencyService.getCurrencyRate();
     }
 
 }
