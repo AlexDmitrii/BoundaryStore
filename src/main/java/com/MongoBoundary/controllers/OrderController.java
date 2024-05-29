@@ -4,6 +4,7 @@ import com.MongoBoundary.models.Order;
 import com.MongoBoundary.models.Product;
 import com.MongoBoundary.models.ProductsList;
 import com.MongoBoundary.services.OrderService;
+import com.MongoBoundary.util.Util;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +43,7 @@ public class OrderController {
 
     @PostMapping("/create")
     public Order createOrder(@RequestBody Order order) {
+        order.setDateCreate(Util.getCurrentDate());
         return orderService.createOrder(order);
     }
 

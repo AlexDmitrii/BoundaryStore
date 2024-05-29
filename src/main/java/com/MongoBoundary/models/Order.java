@@ -33,6 +33,5 @@ public class Order {
     private String status;
 
     public Order() {
-        this.dateCreate = Util.getCurrentDate();
     }
 }
