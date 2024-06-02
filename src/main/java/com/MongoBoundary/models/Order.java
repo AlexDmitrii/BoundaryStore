@@ -32,6 +32,4 @@ public class Order {
     private Double amountItems;
     private String status;
 
-    public Order() {
-    }
 }

@@ -1,19 +1,43 @@
 package com.MongoBoundary.models;
 
-import com.MongoBoundary.util.Constant;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.*;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-@Data
-@Document(collection = Constant.ROLE_DB_NAME)
-@AllArgsConstructor
-@NoArgsConstructor
-public class Role {
+import java.util.*;
+import java.util.stream.Collectors;
 
-    private Integer level;
+import static com.MongoBoundary.models.Permissions.*;
 
-    private String name;
+@Getter
+@RequiredArgsConstructor
+public enum Role {
 
+    USER(Collections.emptySet()),
+
+    ADMIN(Set.of(
+            ADMIN_ALL,
+            DEV_ALL,
+            MANAGER_ALL
+    )),
+
+    DEV(Set.of(
+            DEV_ALL,
+            MANAGER_ALL
+    )),
+
+    MANAGER(Set.of(
+            MANAGER_ALL
+    ));
+
+    private final Set<Permissions> permissions;
+
+    public List<SimpleGrantedAuthority> getAuthorities() {
+        var authorities = getPermissions()
+                .stream()
+                .map(permission -> new SimpleGrantedAuthority(permission.getPermission()))
+                .collect(Collectors.toList());
+        authorities.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
+        return authorities;
+
+    }
 }
