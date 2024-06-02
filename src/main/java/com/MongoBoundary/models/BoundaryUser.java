@@ -1,5 +1,6 @@
 package com.MongoBoundary.models;
 
+import com.MongoBoundary.enums.Role;
 import com.MongoBoundary.util.Constant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

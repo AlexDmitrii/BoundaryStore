@@ -1,4 +1,4 @@
-package com.MongoBoundary.models;
+package com.MongoBoundary.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.MongoBoundary.services.impl;
 
 import com.MongoBoundary.services.CurrencyService;
-import com.MongoBoundary.util.Status;
+import com.MongoBoundary.enums.Status;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;

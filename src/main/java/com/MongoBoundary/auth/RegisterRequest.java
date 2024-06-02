@@ -1,6 +1,6 @@
 package com.MongoBoundary.auth;
 
-import com.MongoBoundary.models.Role;
+import com.MongoBoundary.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

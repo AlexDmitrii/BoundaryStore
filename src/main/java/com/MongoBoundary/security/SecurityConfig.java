@@ -12,7 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static com.MongoBoundary.models.Role.*;
+import static com.MongoBoundary.enums.Role.*;
 
 @Configuration
 @EnableWebSecurity

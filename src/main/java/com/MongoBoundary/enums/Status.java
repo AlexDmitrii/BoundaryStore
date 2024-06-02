@@ -1,4 +1,4 @@
-package com.MongoBoundary.util;
+package com.MongoBoundary.enums;
 
 
 import lombok.AllArgsConstructor;

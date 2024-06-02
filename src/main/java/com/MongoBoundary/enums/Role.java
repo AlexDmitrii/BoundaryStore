@@ -1,12 +1,13 @@
-package com.MongoBoundary.models;
+package com.MongoBoundary.enums;
 
+import com.MongoBoundary.enums.Permissions;
 import lombok.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.MongoBoundary.models.Permissions.*;
+import static com.MongoBoundary.enums.Permissions.*;
 
 @Getter
 @RequiredArgsConstructor

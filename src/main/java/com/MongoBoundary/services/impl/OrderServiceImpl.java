@@ -8,7 +8,7 @@ import com.MongoBoundary.repositories.ProductRepo;
 import com.MongoBoundary.services.OrderService;
 import com.MongoBoundary.util.Constant;
 import com.MongoBoundary.util.SoapUtil;
-import com.MongoBoundary.util.Status;
+import com.MongoBoundary.enums.Status;
 import com.MongoBoundary.util.Util;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.MongoTemplate;
